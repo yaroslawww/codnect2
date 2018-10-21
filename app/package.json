@@ -1,0 +1,18 @@
+{
+  "name": "codnect2",
+  "productName": "Codnect2",
+  "version": "0.0.1",
+  "description": "App-helper for manage ssh connection",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "Yaroslav Georgitsa",
+    "email": "yaroslav.georgitsa@gmail.com",
+    "url": "https://github.com/yaroslawww"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r babel-register ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
