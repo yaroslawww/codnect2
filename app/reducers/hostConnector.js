@@ -1,5 +1,5 @@
 // @flow
-import { UPDATE_HOSTS } from '../actions/hostConnector';
+import { REMOVE_CONFIGFILE, UPDATE_HOSTS } from '../actions/hostConnector';
 import type { HostsUpdatedAction } from './types';
 
 export default function hosts(
@@ -9,6 +9,8 @@ export default function hosts(
   switch (action.type) {
     case UPDATE_HOSTS:
       return action.hosts;
+    case REMOVE_CONFIGFILE:
+      return {};
     default:
       return hostsList;
   }

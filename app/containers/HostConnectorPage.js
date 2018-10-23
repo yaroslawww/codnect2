@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import HostConnector from '../components/HostConnector';
+import HostConnector from '../components/HostConnector/HostConnector';
 import * as HostConnectorActions from '../actions/hostConnector';
 
 function mapStateToProps(state) {

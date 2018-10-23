@@ -1,14 +1,15 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Host from '../utils/class-host';
-import Connector from '../utils/class-connector';
+import routes from '../../constants/routes';
+import TabInfo from './TabInfo';
+import { TAB_BASE, TAB_FILE, TAB_HOST } from '../../actions/hostConnector';
 import styles from './HostConnector.scss';
-import routes from '../constants/routes';
-import { send } from "redux-electron-ipc";
+
 
 type Props = {
   selectConfigFile: () => void,
+  removeConfigFile: () => void,
   checkPreferences: () => void,
   hostConnector: object
 };
@@ -19,32 +20,48 @@ export default class HostConnector extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      displayTab: null
+      displayTab: '',
+      displayInfo: {}
     };
 
+    this.openBaseInfoTab = this.openBaseInfoTab.bind(this);
     this.openFileInfoTab = this.openFileInfoTab.bind(this);
     this.openHostInfoTab = this.openHostInfoTab.bind(this);
+    this.removeConfigFileAction = this.removeConfigFileAction.bind(this);
   }
 
   componentDidMount() {
     this.props.checkPreferences();
   }
 
-  connectToServer(hostData) {
-    const host = (new Host()).createFromObject(hostData);
-    const hostConnector = new Connector(host);
-    hostConnector.runSsh();
+  removeConfigFileAction() {
+    this.props.removeConfigFile();
+    this.openBaseInfoTab();
+  }
+
+  openBaseInfoTab() {
+    this.setState({
+      displayTab: TAB_BASE,
+      displayInfo: {}
+    });
   }
 
   openFileInfoTab() {
     this.setState({
-      displayTab: '#configfile'
+      displayTab: TAB_FILE,
+      displayInfo: {
+        selectConfigFile: this.props.selectConfigFile,
+        removeConfigFile: this.removeConfigFileAction
+      }
     });
   }
 
   openHostInfoTab(hostName) {
     this.setState({
-      displayTab: hostName
+      displayTab: TAB_HOST,
+      displayInfo: {
+        host: this.props.hostConnector.hosts[hostName]
+      }
     });
   }
 
@@ -53,7 +70,7 @@ export default class HostConnector extends Component<Props> {
     Object.keys(hosts).forEach((value) => {
       list.push(<li key={value} onClick={() => this.openHostInfoTab(value)}>
         <div className={styles.textWrapper}>
-          <i className="fa fa-circle" />&nbsp;{value}
+          <i className="fa fa-circle"/>&nbsp;{value}
         </div>
         <i className="fa fa-chevron-right"/>
       </li>);
@@ -65,7 +82,6 @@ export default class HostConnector extends Component<Props> {
     const { selectConfigFile, hostConnector } = this.props;
     let configfile;
     let hostsList;
-    let tabInfo;
 
     // Config file
     if (hostConnector.hosts === undefined || Object.keys(hostConnector.hosts).length === 0) {
@@ -94,31 +110,13 @@ export default class HostConnector extends Component<Props> {
     } else {
       hostsList = <div className={styles.hostsList}>
         <div className={styles.hostsList__header}>
-          <i className="fa fa-laptop-code" />&nbsp;Hosts:
+          <i className="fa fa-laptop-code"/>&nbsp;Hosts:
         </div>
         <div className={styles.hostsList__content}>
           <ul>
             {this.renderHostsList(hostConnector.hosts)}
           </ul>
         </div>
-      </div>;
-    }
-
-    // Tab info
-    if (this.state.displayTab === '#configfile') {
-      tabInfo = <div>
-        <button onClick={selectConfigFile}>
-          Change file
-        </button>
-      </div>;
-    } else if (this.state.displayTab === null) {
-      tabInfo = <div />;
-    } else {
-      tabInfo = <div>
-        <h2>Host: {this.state.displayTab}</h2>
-        <button onClick={() => this.connectToServer(hostConnector.hosts[this.state.displayTab])}>
-          Connect to server
-        </button>
       </div>;
     }
 
@@ -137,7 +135,7 @@ export default class HostConnector extends Component<Props> {
             {hostsList}
           </div>
           <div className={styles.content__data}>
-            {tabInfo}
+            <TabInfo type={this.state.displayTab} data={this.state.displayInfo}/>
           </div>
         </div>
       </div>

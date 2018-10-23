@@ -5,7 +5,12 @@ import type { Dispatch } from '../reducers/types';
 
 const explorerDialog = require('electron').remote.dialog;
 
+export const TAB_BASE = 'DASHBOARD';
+export const TAB_FILE = 'CONFIG_FILE';
+export const TAB_HOST = 'HOST_DATA';
+
 export const UPDATE_HOSTS = 'UPDATE_HOSTS';
+export const REMOVE_CONFIGFILE = 'REMOVE_CONFIGFILE';
 
 export function selectConfigFile() {
   return (dispatch: Dispatch) => {
@@ -16,10 +21,22 @@ export function selectConfigFile() {
   };
 }
 
+export function removeConfigFile() {
+  return (dispatch: Dispatch) => {
+      dispatch(send('configFile.needRemove'));
+  };
+}
+
 export function configFileParsed(event, ...args) {
   return {
     type: UPDATE_HOSTS,
     hosts: args[0]
+  };
+}
+
+export function configFileRemoved() {
+  return {
+    type: REMOVE_CONFIGFILE,
   };
 }
 

@@ -123,8 +123,13 @@ ipcMain.on('configFile.selected', (event, ...args) => {
   });
 });
 
+ipcMain.on('configFile.needRemove', (event, ...args) => {
+  store.set('configFile.path', undefined);
+  event.sender.send('configFile.removed');
+});
+
 ipcMain.on('checkPreferences', (event, ...args) => {
-  if(store.get('configFile.path') !== undefined) {
+  if (store.get('configFile.path') !== undefined) {
     /* eslint-disable */
     const configReader = require(`${__dirname}/utils/config-reader`);
     /* eslint-enables */
