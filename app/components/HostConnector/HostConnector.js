@@ -28,6 +28,7 @@ export default class HostConnector extends Component<Props> {
     this.openFileInfoTab = this.openFileInfoTab.bind(this);
     this.openHostInfoTab = this.openHostInfoTab.bind(this);
     this.removeConfigFileAction = this.removeConfigFileAction.bind(this);
+    this.reUpdateConfigFileAction = this.reUpdateConfigFileAction.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,10 @@ export default class HostConnector extends Component<Props> {
   removeConfigFileAction() {
     this.props.removeConfigFile();
     this.openBaseInfoTab();
+  }
+
+  reUpdateConfigFileAction(filePath) {
+    this.props.reUpdateConfigFile(filePath);
   }
 
   openBaseInfoTab() {
@@ -51,7 +56,9 @@ export default class HostConnector extends Component<Props> {
       displayTab: TAB_FILE,
       displayInfo: {
         selectConfigFile: this.props.selectConfigFile,
-        removeConfigFile: this.removeConfigFileAction
+        removeConfigFile: this.removeConfigFileAction,
+        reUpdateConfigFile: this.reUpdateConfigFileAction,
+        filePath: this.props.hostConnector.filePath,
       }
     });
   }

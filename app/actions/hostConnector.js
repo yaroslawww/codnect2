@@ -27,6 +27,12 @@ export function removeConfigFile() {
   };
 }
 
+export function reUpdateConfigFile(filePath) {
+  return (dispatch: Dispatch) => {
+      dispatch(send('configFile.selected', filePath));
+  };
+}
+
 export function configFileParsed(event, ...args) {
   return {
     type: UPDATE_HOSTS,
