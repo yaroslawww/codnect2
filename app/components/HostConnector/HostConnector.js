@@ -60,7 +60,8 @@ export default class HostConnector extends Component<Props> {
     this.setState({
       displayTab: TAB_HOST,
       displayInfo: {
-        host: this.props.hostConnector.hosts[hostName]
+        host: this.props.hostConnector.hosts[hostName],
+        fileDir: this.props.hostConnector.fileDir
       }
     });
   }

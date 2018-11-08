@@ -12,7 +12,7 @@ export default class TabHost extends React.Component<Props> {
 
   render() {
     const host = (new Host()).createFromObject(this.props.data.host);
-    const hostConnector = new Connector(host);
+    const hostConnector = new Connector(host, this.props.data.fileDir);
 
     return <div>
       <h2>Host: {host.name}</h2>
