@@ -54,22 +54,24 @@ export default class TabFile extends React.Component<Props> {
       <button onClick={this.props.data.selectConfigFile}>
         Change file
       </button>
-      <br/>
+
       <button onClick={() => this.props.data.removeConfigFile()}>
         Remove File
       </button>
-      <br/>
      {/* <button onClick={() => this.editConfigFile(this.props.data.filePath)}>
         Edit File
       </button>
       <br/>*/}
-      <textarea rows="5" value={this.state.fileValue} onChange={(event) => {
-        this.setState({ fileValue: event.target.value });
-      }}></textarea>
-      <br/>
       <button onClick={() => this.saveConfigFile(this.props.data.filePath)}>
         Save changes
       </button>
+      <br/>
+      <br/>
+
+      <textarea rows="5" style={{width: '100%', height: 'calc(100vh - 100px)'}} value={this.state.fileValue} onChange={(event) => {
+        this.setState({ fileValue: event.target.value });
+      }}></textarea>
+
     </div>;
   }
 }

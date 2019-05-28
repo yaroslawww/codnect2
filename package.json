@@ -1,7 +1,7 @@
 {
   "name": "codnect2",
   "productName": "Codnect2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "App-helper for manage ssh connection",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -91,7 +91,6 @@
     "linux": {
       "target": [
         "deb",
-        "rpm",
         "snap",
         "AppImage"
       ],
@@ -224,8 +223,7 @@
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
-    "webpack-merge": "^4.1.3",
-    "yarn": "^1.9.2"
+    "webpack-merge": "^4.1.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
