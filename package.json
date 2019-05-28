@@ -91,6 +91,7 @@
     "linux": {
       "target": [
         "deb",
+        "rpm",
         "snap",
         "AppImage"
       ],
@@ -171,7 +172,7 @@
     "css-loader": "^1.0.0",
     "detect-port": "^1.2.3",
     "electron": "^2.0.6",
-    "electron-builder": "^20.26.0",
+    "electron-builder": "^20.42.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-rebuild": "^1.8.2",
     "enzyme": "^3.3.0",
@@ -220,8 +221,8 @@
     "uglifyjs-webpack-plugin": "1.2.7",
     "url-loader": "^1.0.1",
     "webpack": "^4.16.3",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.1.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^webpack-cli",
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.3"
   },

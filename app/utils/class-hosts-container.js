@@ -1,5 +1,5 @@
 const path = require('path');
-const Host = require(`${__dirname  }/class-host`);
+const Host = require('./class-host');
 
 class HostsContainer {
 

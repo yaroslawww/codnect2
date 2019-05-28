@@ -115,7 +115,7 @@ app.on('ready', async () => {
 
 ipcMain.on('configFile.selected', (event, ...args) => {
   /* eslint-disable */
-  const configReader = require(`${__dirname}/utils/config-reader`);
+  const configReader = require('./utils/config-reader');
   /* eslint-enables */
   configReader.read(args[0], (hostsContainer: HostsContainer) => {
     store.set('configFile.path', hostsContainer.filePath);
@@ -131,7 +131,7 @@ ipcMain.on('configFile.needRemove', (event, ...args) => {
 ipcMain.on('checkPreferences', (event, ...args) => {
   if (store.get('configFile.path') !== undefined) {
     /* eslint-disable */
-    const configReader = require(`${__dirname}/utils/config-reader`);
+    const configReader = require('./utils/config-reader');
     /* eslint-enables */
     configReader.read(store.get('configFile.path'), (hostsContainer: HostsContainer) => {
       event.sender.send('configFile.parsed', hostsContainer);

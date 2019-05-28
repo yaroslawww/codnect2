@@ -1,5 +1,4 @@
 const childProcess = require('child_process');
-const _ = require("lodash");
 
 class Connector {
 
@@ -41,7 +40,7 @@ class Connector {
         command = `cd ${ this._atPath}; ${  command}`;
       }
     } else if (this._host.sshPass) {
-      command = `sshpass -p '${ _.escapeRegExp(this._host.sshPass)  }' ${  command}`;
+      command = `sshpass -p '${ this._host.sshPass.replace("$", "\\$")  }' ${  command}`;
     }
     if (this._host.sshDir) {
       command += ` -t 'cd ${  this._host.sshDir  }; bash'`;
