@@ -40,7 +40,7 @@ class Connector {
         command = `cd ${ this._atPath}; ${  command}`;
       }
     } else if (this._host.sshPass) {
-      command = `sshpass -p '${ this._host.sshPass.replace("$", "\\$")  }' ${  command}`;
+      command = `sshpass -p '${ this._host.sshPass.replace(/[$]/g, "\\$")  }' ${  command}`;
     }
     if (this._host.sshDir) {
       command += ` -t 'cd ${  this._host.sshDir  }; bash'`;
