@@ -1,7 +1,7 @@
 {
   "name": "codnect2",
   "productName": "Codnect2",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "App-helper for manage ssh connection",
   "main": "./main.prod.js",
   "author": {

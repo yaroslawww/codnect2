@@ -48,6 +48,12 @@ export default class TabFile extends React.Component<Props> {
     });
   }
 
+  openInEditor(filePath) {
+    const shell = require('electron').shell;
+
+    shell.openItem(filePath);
+  }
+
   render() {
     let fileData = this.fileData;
     return <div>
@@ -64,6 +70,9 @@ export default class TabFile extends React.Component<Props> {
       <br/>*/}
       <button onClick={() => this.saveConfigFile(this.props.data.filePath)}>
         Save changes
+      </button>
+      <button onClick={() => this.openInEditor(this.props.data.filePath)}>
+        Open In Editor
       </button>
       <br/>
       <br/>
